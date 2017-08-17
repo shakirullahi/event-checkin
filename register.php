@@ -5,7 +5,7 @@ if (isset($_POST["submit"])) {
 	$name = $_POST['name'];
 	$email = $_POST['email'];
 	$contact = $_POST['contact'];
-	$college = $_POST['college'];
+	$college = (!empty($_POST['college_new'])) ? $_POST['college_new']:$_POST['college'];
 	$status = ($_POST['status'] == 'on') ? "checkedin" : "confirmed";
 	$sql = "INSERT INTO ". $SETTINGS['data_table'] ." (`name`, `email`, `contact`, `college`, `status`) VALUES ('".$name."', '".$email."', '".$contact."', '".$college."', '".$status."')";
 	mysqli_query($connection,$sql) or die ('request "Could not execute SQL query" '.$sql);
@@ -32,7 +32,7 @@ if (isset($_POST["submit"])) {
 <body>
 
   <div class="container">
-    
+
     <div class="row" id="first-container-normal">
       <div class="col">
           <br><br><br>
@@ -72,17 +72,29 @@ if (isset($_POST["submit"])) {
 	      <div class="col-sm-10">
 	        <input type="text" class="form-control" id="contact" name="contact" placeholder="Contact">
 	      </div>
-	    </div>	    
+	    </div>
 	    <div class="form-group row">
 	      <label for="college" class="col-sm-2 col-form-label">College</label>
 	      <div class="col-sm-10">
 	      	<select name="college" class="form-control" id="college">
-	      		<option>Bangalore</option>
-	      		<option>Kerala</option>
+						<?php
+							$sql = "SELECT DISTINCT college FROM aisyc_delig order By college";
+							$sql_result = mysqli_query($connection,$sql) or die ('request "Could not execute SQL query" '.$sql);
+							if (mysqli_num_rows($sql_result)>0) {
+								while ($row = mysqli_fetch_assoc($sql_result)) {
+									echo "<option>".$row['college']."</option>";
+								}
+							}
+							?>
 	      	</select>
 	      </div>
 	    </div>
-
+			<div class="form-group row">
+	      <label for="contact" class="col-sm-2 col-form-label"></label>
+	      <div class="col-sm-10">
+	        <input type="text" class="form-control" id="contact" name="college_new" placeholder="Contact">
+	      </div>
+	    </div>
 	    <div class="form-group row">
 	      <div class="col-sm-2">Check In</div>
 	      <div class="col-sm-10">
@@ -100,7 +112,7 @@ if (isset($_POST["submit"])) {
 	    </div>
   </form>
 
-    
+
 
   </div>
 

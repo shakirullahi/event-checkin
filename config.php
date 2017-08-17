@@ -27,20 +27,20 @@ Released: 2012-03-18
 */
 ###########################################################
 
-/* Define MySQL connection details and database table name */ 
+/* Define MySQL connection details and database table name */
 $SETTINGS["hostname"]='mysql';
 $SETTINGS["mysql_user"]='root';
-$SETTINGS["mysql_pass"]='';
-$SETTINGS["mysql_database"]='test';
+$SETTINGS["mysql_pass"]='root';
+$SETTINGS["mysql_database"]='event-checkin';
 $SETTINGS["data_table"]='aisyc_delig'; // this is the default database name that we used
 
 /* Connect to MySQL */
 
 if (!isset($install) or $install != '1') {
-$connection = mysqli_connect('localhost','root','','test'); 
-if (!$connection) { 
-	die('Could not connect to MySQL: ' . mysqli_error()); 
-} 
+$connection = mysqli_connect('localhost','root','root','event-checkin');
+if (!$connection) {
+	die('Could not connect to MySQL: ' . mysqli_error());
+}
 
 };
 ?>

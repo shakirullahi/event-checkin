@@ -45,70 +45,14 @@ include("config.php");
       </div>
     </div>
     <hr>
-
-    <!-- Manual search starts here -->
-    <!-- <div class="row">
-      <div class="col">
-        <form id="form1" name="form1" method="post" action="search.php">
-          <div class="row">
-            <div class="col-2">
-              <label for="name" class="col-form-label">Name</label>
-            </div>
-
-              <div class="col-6">
-                <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="<?php echo $_REQUEST['name']; ?>">
-              </div>
-              <div class="col-2">
-                <input type="submit" name="button" id="button" value="Find" class="btn btn-secondary"/>
-              </div>
-
-            <div class="col-2">
-              <a href="search.php" class="form-control"> Reset</a>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <div class="col">
-        <form id="form1" name="form1" method="post" action="search.php">
-          <div class="row">
-            <div class="col-2">
-              <label for="inputEmail3" class="col-form-label">College</label>
-            </div>
-
-              <div class="col-6">
-                <select class="form-control" name="college">
-                      <option>--Select--</option>
-                      <option>Bangalore</option>
-                      <option>Kolkata</option>
-                      <option>Madras</option>
-                      <option>Sri Lanka</option>
-                      <option>Pune</option>
-                </select>
-              </div>
-              <div class="col-2">
-                <input type="submit" name="button" id="button" value="Find" class="btn btn-secondary"/>
-              </div>
-
-            <div class="col-2">
-              <a href="search.php" class="form-control"> Reset</a>
-            </div>
-          </div>
-        </form>
-      </div>
-
-    </div> -->
-    <!-- Manual search ends here -->
-
-
     <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>College</th>
                 <th>Email</th>
-                <th>Contact</th>
-                <th>Check In</th>
+                <th>Score</th>
+                <th>Add Score</th>
             </tr>
         </thead>
         <tbody>
@@ -116,17 +60,17 @@ include("config.php");
           <?php
             if ($_REQUEST["name"]<>'') {
               $search_string = " AND name LIKE '%".$_REQUEST['name']."%'";
-            $sql = "SELECT * FROM " . $SETTINGS['data_table'] . " WHERE slno>0 AND status='confirmed'" . $search_string;
+            $sql = "SELECT * FROM " . $SETTINGS['data_table'] . " WHERE slno>0 AND status='checkedin'" . $search_string;
             }
 
             elseif ($_REQUEST["college"]<>'') {
               $search_string = " AND college LIKE '%".$_REQUEST['college']."%'";
-              $sql = "SELECT * FROM " . $SETTINGS['data_table'] . " WHERE slno>0 AND status='confirmed'" . $search_string;
+              $sql = "SELECT * FROM " . $SETTINGS['data_table'] . " WHERE slno>0 AND status='checkedin'" . $search_string;
             }
 
             else
             {
-              $sql = "SELECT * FROM " . $SETTINGS['data_table'] . " WHERE status='confirmed'";
+              $sql = "SELECT * FROM " . $SETTINGS['data_table'] . " WHERE status='checkedin'";
             }
 
             $sql_result = mysqli_query($connection,$sql) or die ('request "Could not execute SQL query" '.$sql);
@@ -138,9 +82,9 @@ include("config.php");
                 <td><?php echo $row['name']; ?></td>
                 <td><?php echo $row['college']; ?></td>
                 <td><?php echo $row['email']; ?></td>
-                <td><?php echo $row['contact']; ?></td>
+                <td><?php echo $row['score']; ?></td>
                 <td>
-                  <?php echo "<form action='checkin.php'><input type='hidden' name='id' value='".$row['slno']."'><input class='btn btn-info' type='submit'value='Check In'></form>" ?>
+                  <?php echo "<form method='get' action='activity-score.php'><input type='hidden' name='id' value='".$row['slno']."'><input class='form-control' style='display:inline-block;width:100px;' type='text' name='score' value='' required><input class='btn btn-info' style='display:inline-block' type='submit'value='Add'></form>" ?>
                 </td>
               </tr>
             <?php
@@ -158,8 +102,8 @@ include("config.php");
                 <th>Name</th>
                 <th>College</th>
                 <th>Email</th>
-                <th>Contact</th>
-                <th>Check In</th>
+                <th>Score</th>
+                <th>Add Score</th>
             </tr>
         </tfoot>
     </table>
