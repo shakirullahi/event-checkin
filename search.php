@@ -43,7 +43,11 @@ include("config.php");
       <div class="col">
         <a href="register.php" class="btn btn-light btn-block">New Registration</a>
       </div>
+      <div class="col">
+	      <a href="activity-hub.php" class="btn btn-light btn-block">Activity Hub</a>
+	    </div>
     </div>
+
     <hr>
 
     <!-- Manual search starts here -->
@@ -111,6 +115,15 @@ include("config.php");
                 <th>Check In</th>
             </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>College</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Check In</th>
+            </tr>
+        </tfoot>
         <tbody>
 
           <?php
@@ -137,10 +150,12 @@ include("config.php");
               <tr>
                 <td><?php echo $row['name']; ?></td>
                 <td><?php echo $row['college']; ?></td>
-                <td><?php echo $row['email']; ?></td>
-                <td><?php echo $row['contact']; ?></td>
+                <td><form action='checkin.php'> <?php echo (empty($row['email']))?" <input style='width:150px;background-color: #FFFFE0;' class='form-control form-control-sm' type='text' name='email' value=''>" :$row['email']; ?></td>
+                <td><?php echo (empty($row['contact']))?" <input style='width:100px;background-color: #FFFFE0;' class='form-control form-control-sm' type='text' name='contact' value=''>" :$row['contact']; ?></td>
                 <td>
-                  <?php echo "<form action='checkin.php'><input type='hidden' name='id' value='".$row['slno']."'><input class='btn btn-info' type='submit'value='Check In'></form>" ?>
+                  <?php
+                    echo "<input type='hidden' name='id' value='".$row['slno']."'> <input type='checkbox' name='faculty' value='Faculty'>Faculty <input class='btn btn-info' type='submit'value='Check In'></form>";
+                  ?>
                 </td>
               </tr>
             <?php
@@ -153,15 +168,7 @@ include("config.php");
             ?>
 
         </tbody>
-        <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>College</th>
-                <th>Email</th>
-                <th>Contact</th>
-                <th>Check In</th>
-            </tr>
-        </tfoot>
+
     </table>
 
   </div>

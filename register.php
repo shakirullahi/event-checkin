@@ -5,9 +5,10 @@ if (isset($_POST["submit"])) {
 	$name = $_POST['name'];
 	$email = $_POST['email'];
 	$contact = $_POST['contact'];
+	$designation = $_POST['designation'];
 	$college = (!empty($_POST['college_new'])) ? $_POST['college_new']:$_POST['college'];
 	$status = ($_POST['status'] == 'on') ? "checkedin" : "confirmed";
-	$sql = "INSERT INTO ". $SETTINGS['data_table'] ." (`name`, `email`, `contact`, `college`, `status`) VALUES ('".$name."', '".$email."', '".$contact."', '".$college."', '".$status."')";
+	$sql = "INSERT INTO ". $SETTINGS['data_table'] ." (`name`, `email`, `contact`, `college`,`designation`, `status`, `spot`) VALUES ('".$name."', '".$email."', '".$contact."', '".$college."', '".$designation."', '".$status."',1)";
 	mysqli_query($connection,$sql) or die ('request "Could not execute SQL query" '.$sql);
 }
 ?>
@@ -51,6 +52,9 @@ if (isset($_POST["submit"])) {
       <div class="col">
         <a href="checkedlist.php" class="btn btn-light btn-block">Checked In Lis</a>
       </div>
+			<div class="col">
+	      <a href="activity-hub.php" class="btn btn-light btn-block">Activity Hub</a>
+	    </div>
     </div>
     <hr>
 
@@ -92,7 +96,17 @@ if (isset($_POST["submit"])) {
 			<div class="form-group row">
 	      <label for="contact" class="col-sm-2 col-form-label"></label>
 	      <div class="col-sm-10">
-	        <input type="text" class="form-control" id="contact" name="college_new" placeholder="Contact">
+	        <input type="text" class="form-control" id="new_collge" name="college_new" placeholder="New College">
+	      </div>
+	    </div>
+			<div class="form-group row">
+	      <label for="college" class="col-sm-2 col-form-label">College</label>
+	      <div class="col-sm-10">
+	      	<select name="designation" class="form-control" id="designation">
+						<option>Student</option>
+						<option>Faculty</option>
+						<option>Visitor</option>
+	      	</select>
 	      </div>
 	    </div>
 	    <div class="form-group row">
@@ -120,7 +134,5 @@ if (isset($_POST["submit"])) {
 <!-- <script src="js/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<!-- Script ends -->
-
 </body>
 </html>

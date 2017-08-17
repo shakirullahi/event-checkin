@@ -10,7 +10,7 @@ include("config.php");
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>IEDC Summit 2017 - Registration</title>
+  <title>IEDC Summit 2017 - Activity Hub</title>
   <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap4.min.css">
@@ -28,7 +28,7 @@ include("config.php");
     <div class="row" id="first-container-normal">
       <div class="col">
           <br><br><br>
-          <h3>Confirmed Participant List</h3>
+          <h3>Activity Hub</h3>
           <br><br>
       </div>
     </div>
@@ -43,6 +43,10 @@ include("config.php");
       <div class="col">
         <a href="register.php" class="btn btn-light btn-block">New Registration</a>
       </div>
+      <div class="col">
+	      <a href="activity-hub.php" class="btn btn-light btn-block">Activity Hub</a>
+	    </div>
+
     </div>
     <hr>
     <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">

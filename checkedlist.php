@@ -24,7 +24,7 @@ include("config.php");
 <body>
 
   <div class="container">
-    
+
     <div class="row" id="first-container-normal">
       <div class="col">
           <br><br><br>
@@ -43,6 +43,10 @@ include("config.php");
       <div class="col">
         <a href="register.php" class="btn btn-light btn-block">New Registration</a>
       </div>
+      <div class="col">
+	      <a href="activity-hub.php" class="btn btn-light btn-block">Activity Hub</a>
+	    </div>
+
     </div>
     <hr>
 
@@ -69,7 +73,7 @@ include("config.php");
 
         <?php
           if ($_REQUEST["name"]<>'') {
-            $search_string = " AND name LIKE '%".$_REQUEST['name']."%'";  
+            $search_string = " AND name LIKE '%".$_REQUEST['name']."%'";
           $sql = "SELECT * FROM " . $SETTINGS['data_table'] . " WHERE slno>0 AND status='checkedin'" . $search_string;
 
           }
@@ -84,16 +88,16 @@ include("config.php");
 
           ?>
             <tr>
-              <td><?php echo $count++; ?></td>  
+              <td><?php echo $count++; ?></td>
               <td><?php echo $row['name']; ?></td>
               <td><?php echo $row['college']; ?></td>
               <td><?php echo $row['email']; ?></td>
               <td><?php echo $row['contact']; ?></td>
-              
+
             </tr>
           <?php
             }
-          } 
+          }
           ?>
 
         </tbody>
@@ -120,12 +124,12 @@ include("config.php");
                         var val = $.fn.dataTable.util.escapeRegex(
                             $(this).val()
                         );
- 
+
                         column
                             .search( val ? '^'+val+'$' : '', true, false )
                             .draw();
                     } );
- 
+
                 column.data().unique().sort().each( function ( d, j ) {
                     select.append( '<option value="'+d+'">'+d+'</option>' )
                 } );
