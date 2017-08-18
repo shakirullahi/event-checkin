@@ -21,33 +21,49 @@ include("config.php");
     }
   </style>
 </head>
-<body>
+<body class="activity-result-page">
 
-  <div class="container">
+  <div class="container activity-result-page">
 
     <div class="row" id="first-container-normal">
       <div class="col">
-          <br><br><br>
-          <h3>Activity Hub</h3>
-          <br><br>
+        <br>
+          <h5>Activity Hub - Leaderbaord</h5>
+          <br>
       </div>
     </div>
 
-  <div class="row">
 
     <?php
 
     $sql_hub = "SELECT * FROM " . $SETTINGS['data_table'] . " where score !=0 order by score DESC limit 10";
     $r_hub = mysqli_query($connection,$sql_hub) or die ('request "Could not execute SQL query"');
-    echo '<ul class="list-group col-4"><li class="list-group-item active">Activity Hub result</li>';
+
     if (mysqli_num_rows($r_hub)>0) {
       while ($row = mysqli_fetch_assoc($r_hub)) {
-        echo '<li class="list-group-item"><div class="btn"><span class="badge badge-secondary">'.$row['score'].'</span></div> - '.$row['name'].' - <span class="">'.$row['college'].'</span></li>';
+        echo '<div class="row">
+      <div class="col-12 leader-board-item">
+        <div class="score-box">
+          '.$row['score'].'
+        </div>
+        <div class="name-box">
+          <div class="participant-name">
+            '.$row['name'].'
+          </div>
+          <div class="participant-college">
+            '.$row['college'].'
+          </div>
+        </div>
+      </div>
+    </div>';
+
+        // echo '<li class="list-group-item"><div class="btn"><span class="badge badge-secondary">'.$row['score'].'</span></div> - '.$row['name'].' - <span class="">'.$row['college'].'</span></li>';
       }
     }
     echo "</ul><br>";
     ?>
-    </div>
+
+
   </div>
 
 <!-- Script starts -->
