@@ -28,7 +28,7 @@ include("config.php");
     <div class="row" id="first-container-normal">
       <div class="col">
           <br><br><br>
-          <h3>Confirmed Participant List</h3>
+          <h3>Check In</h3>
           <br><br>
       </div>
     </div>
@@ -38,24 +38,21 @@ include("config.php");
         <a href="index.html" class="btn btn-light btn-block">Home</a>
       </div>
       <div class="col">
-        <a href="search-new.php" class="btn btn-light btn-block">Check In</a>
-      </div>      
+        <a href="checkedlist.php" class="btn btn-light btn-block">Checked In List</a>
+      </div>
       <div class="col">
         <a href="register.php" class="btn btn-light btn-block">New Registration</a>
       </div>
       <div class="col">
-        <a href="checkedlist.php" class="btn btn-light btn-block">Checked In List</a>
-      </div>
-      <!-- <div class="col">
 	      <a href="activity-hub.php" class="btn btn-light btn-block">Activity Hub</a>
-	    </div> -->
+	    </div>
     </div>
 
     <hr>
 
     <!-- Manual search starts here -->
-    <!-- <div class="row">
-      <div class="col">
+    <div class="row">
+      <!-- <div class="col">
         <form id="form1" name="form1" method="post" action="search.php">
           <div class="row">
             <div class="col-2">
@@ -75,40 +72,44 @@ include("config.php");
           </div>
         </form>
       </div>
-
+ -->
       <div class="col">
         <form id="form1" name="form1" method="post" action="search.php">
           <div class="row">
             <div class="col-2">
-              <label for="inputEmail3" class="col-form-label">College</label>
+              <label for="inputEmail3" class="col-form-label">Select College</label>
             </div>
 
-              <div class="col-6">
+              <div class="col-8">
                 <select class="form-control" name="college">
-                      <option>--Select--</option>
-                      <option>Bangalore</option>
-                      <option>Kolkata</option>
-                      <option>Madras</option>
-                      <option>Sri Lanka</option>
-                      <option>Pune</option>
+                  <?php
+                    $sql = "SELECT DISTINCT college FROM aisyc_delig order By college";
+                    $sql_result = mysqli_query($connection,$sql) or die ('request "Could not execute SQL query" '.$sql);
+                    if (mysqli_num_rows($sql_result)>0) {
+                      while ($row = mysqli_fetch_assoc($sql_result)) {
+                        echo "<option>".$row['college']."</option>";
+                      }
+                    }
+                  ?>   
                 </select>
               </div>
               <div class="col-2">
                 <input type="submit" name="button" id="button" value="Find" class="btn btn-secondary"/>
               </div>
 
-            <div class="col-2">
+            <!-- <div class="col-2">
               <a href="search.php" class="form-control"> Reset</a>
-            </div>
+            </div> -->
           </div>
         </form>
       </div>
 
-    </div> -->
+    </div>
+    <br><br>
     <!-- Manual search ends here -->
 
 
-    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+ <!--    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -118,6 +119,15 @@ include("config.php");
                 <th>Check In</th>
             </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>College</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Check In</th>
+            </tr>
+        </tfoot>
         <tbody>
 
           <?php
@@ -143,8 +153,8 @@ include("config.php");
             ?>
               <tr>
                 <td><?php echo $row['name']; ?></td>
-                <td><form action='checkin.php'> <input type="hidden" value="<?php echo $row['college']; ?>" name="college"> <?php echo $row['college']; ?></td>
-                <td><?php echo (empty($row['email']))?" <input style='width:150px;background-color: #FFFFE0;' class='form-control form-control-sm' type='text' name='email' value=''>" :$row['email']; ?></td>
+                <td><?php echo $row['college']; ?></td>
+                <td><form action='checkin.php'> <?php echo (empty($row['email']))?" <input style='width:150px;background-color: #FFFFE0;' class='form-control form-control-sm' type='text' name='email' value=''>" :$row['email']; ?></td>
                 <td><?php echo (empty($row['contact']))?" <input style='width:100px;background-color: #FFFFE0;' class='form-control form-control-sm' type='text' name='contact' value=''>" :$row['contact']; ?></td>
                 <td>
                   <?php
@@ -163,16 +173,7 @@ include("config.php");
 
         </tbody>
 
-        <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>College</th>
-                <th>Email</th>
-                <th>Contact</th>
-                <th>Check In</th>
-            </tr>
-        </tfoot>
-    </table>
+    </table> -->
 
   </div>
 
@@ -180,14 +181,35 @@ include("config.php");
 <!-- <script src="js/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="js/dataTables.bootstrap4.min.js"></script>
+<!-- <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> -->
+<!-- <script type="text/javascript" src="js/dataTables.bootstrap4.min.js"></script> -->
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   $(document).ready(function() {
-    $('#example').DataTable();
-  } );
-</script>
+    $('#example').DataTable( {
+        initComplete: function () {
+            this.api().columns([1]).every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+} );
+</script> -->
 <!-- Script ends -->
 
 </body>

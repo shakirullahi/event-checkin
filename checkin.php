@@ -15,5 +15,5 @@ if(isset($_REQUEST['contact']) && !empty($_REQUEST['contact'])){
 }
 $sql = $sql." WHERE slno=".$id;
 $sql_result = mysqli_query($connection,$sql) or die ('request "Could not execute SQL query" '.$sql);
-header('Location: search.php');
+header('Location: search.php?college='.$_REQUEST['college']);
 ?>

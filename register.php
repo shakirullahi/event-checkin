@@ -47,7 +47,7 @@ if (isset($_POST["submit"])) {
         <a href="index.html" class="btn btn-light btn-block">Home</a>
       </div>
       <div class="col">
-        <a href="search.php" class="btn btn-light btn-block">Check In</a>
+        <a href="search-new.php" class="btn btn-light btn-block">Check In</a>
       </div>
       <div class="col">
         <a href="checkedlist.php" class="btn btn-light btn-block">Checked In Lis</a>
