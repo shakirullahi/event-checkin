@@ -111,6 +111,7 @@ include("config.php");
     <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
+                <th>Sl.No.</th>
                 <th>Name</th>
                 <th>College</th>
                 <th>Email</th>
@@ -142,6 +143,7 @@ include("config.php");
 
             ?>
               <tr>
+                <td><?php echo $row['slno']; ?></td>
                 <td><?php echo $row['name']; ?></td>
                 <td><form action='checkin.php'> <input type="hidden" value="<?php echo $row['college']; ?>" name="college"> <?php echo $row['college']; ?></td>
                 <td><?php echo (empty($row['email']))?" <input style='width:150px;background-color: #FFFFE0;' class='form-control form-control-sm' type='text' name='email' value=''>" :$row['email']; ?></td>
@@ -165,6 +167,7 @@ include("config.php");
 
         <tfoot>
             <tr>
+                <th>Sl.No.</th>
                 <th>Name</th>
                 <th>College</th>
                 <th>Email</th>

@@ -88,7 +88,7 @@ include("config.php");
 
           ?>
             <tr>
-              <td><?php echo $count++; ?></td>
+              <td><?php echo $row['slno']; ?></td>
               <td><?php echo $row['name']; ?></td>
               <td><?php echo $row['college']; ?></td>
               <td><?php echo $row['email']; ?></td>
