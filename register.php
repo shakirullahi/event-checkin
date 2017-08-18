@@ -58,6 +58,14 @@ if (isset($_POST["submit"])) {
     </div>
     <hr>
 
+    <?php
+    	if (isset($_POST["submit"])) {
+    		echo '<div id="success-alert" class="alert alert-success" role="alert">
+			  Participant Registration successful
+			</div>';
+    	}
+    ?>
+
     <form action="register.php" method="post">
 	    <div class="form-group row">
 	      <label for="name" class="col-sm-2 col-form-label">Name</label>
@@ -134,5 +142,11 @@ if (isset($_POST["submit"])) {
 <!-- <script src="js/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script src="js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	$("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#success-alert").slideUp(500);
+});
+</script>
 </body>
 </html>
